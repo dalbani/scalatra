@@ -1,7 +1,7 @@
 package org.scalatra
 
-import javax.servlet._
-import javax.servlet.http.{ HttpServletRequest, HttpServletResponse }
+import jakarta.servlet._
+import jakarta.servlet.http.{ HttpServletRequest, HttpServletResponse }
 
 import org.scalatra.servlet.ServletBase
 import org.scalatra.util.RicherString._
@@ -84,11 +84,11 @@ trait ScalatraFilter extends Filter with ServletBase {
   type ConfigT = FilterConfig
 
   // see Initializable.initialize for why
-  def init(filterConfig: FilterConfig): Unit = {
+  override def init(filterConfig: FilterConfig): Unit = {
     initialize(filterConfig)
   }
 
-  def destroy: Unit = {
+  override def destroy: Unit = {
     shutdown()
   }
 
