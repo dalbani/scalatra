@@ -1,15 +1,15 @@
 package org.scalatra.metrics
 
-import javax.servlet.{ ServletContextEvent, ServletContextListener }
+import jakarta.servlet.{ ServletContextEvent, ServletContextListener }
 
 import org.scalatra.metrics.MetricsSupportExtensions._
 import org.scalatra.test.scalatest.ScalatraFlatSpec
 
 class MetricsServletSupportSpec extends ScalatraFlatSpec {
   servletContextHandler.addEventListener(new ServletContextListener with MetricsBootstrap {
-    def contextDestroyed(sce: ServletContextEvent): Unit = {}
+    override def contextDestroyed(sce: ServletContextEvent): Unit = {}
 
-    def contextInitialized(sce: ServletContextEvent): Unit = {
+    override def contextInitialized(sce: ServletContextEvent): Unit = {
       sce.getServletContext.mountMetricsAdminServlet("/admin")
     }
   })

@@ -1,7 +1,7 @@
 package org.scalatra
 package servlet
 
-import javax.servlet.{ ServletContext, ServletContextEvent, ServletContextListener }
+import jakarta.servlet.{ ServletContext, ServletContextEvent, ServletContextListener }
 
 import org.scalatra.util.RicherString._
 import org.slf4j.LoggerFactory
@@ -27,7 +27,7 @@ class ScalatraListener extends ServletContextListener {
     }
   }
 
-  def contextDestroyed(sce: ServletContextEvent): Unit = {
+  override def contextDestroyed(sce: ServletContextEvent): Unit = {
     if (cycle != null) {
       logger.info("Destroying life cycle class: %s".format(cycle.getClass.getName))
       cycle.destroy(servletContext)

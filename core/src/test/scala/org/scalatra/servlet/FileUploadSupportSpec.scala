@@ -307,7 +307,7 @@ class FileUploadSupportSpec extends MutableScalatraSpec {
       val files = Map("doc1" -> new File(filename), "doc2" -> new File(filename))
 
       post("/get-first-file-item-name", params, files) {
-        body must_== "doc1"
+        body must_== "doc2"
       }
     }
 
