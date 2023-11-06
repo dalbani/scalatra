@@ -24,6 +24,14 @@ class ScalatraSuiteTestServlet extends ScalatraServlet {
     redirect("/redirected")
   }
 
+  get("/redirect-trailing-slash-in-path") {
+    redirect("/redirected/")
+  }
+
+  get("/redirect-trailing-slash-in-query-params") {
+    redirect("/redirected?url=http://url.com/")
+  }
+
   get("/echo_params") {
     params("msg")
   }
@@ -84,10 +92,24 @@ class ScalatraSuiteTest extends ScalatraFunSuite {
     }
   }
 
-  test("header test") {
+  test("redirect header test") {
     get("/redirect") {
       status should equal(302)
       header("Location") should include("/redirected")
+    }
+  }
+
+  test("redirect header test 2") {
+    get("/redirect-trailing-slash-in-path") {
+      status should equal(302)
+      header("Location") should include("/redirect/")
+    }
+  }
+
+  test("redirect header test 3") {
+    get("/redirect-trailing-slash-in-query-params") {
+      status should equal(302)
+      header("Location") should include("/redirect?url=http://url.com/")
     }
   }
 
